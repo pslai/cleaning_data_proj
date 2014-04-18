@@ -64,7 +64,7 @@ data <- rbind(train2, test2)
 data2 <- data[,grep("mean\\(\\)|std\\(\\)|activity|subject|set", colLabels)]  
 
 # Write the combined and edited dataset to a .csv file for distribution
-write.csv(data2, file="tidy1.csv", row.names=FALSE)
+write.table(data2, file="tidy1.txt", row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 # Melt cleaned data with activity and subject as id variables and set (the first column) omitted
 melted <- melt(data2[,-1], id.vars=c("activity", "subject"))
@@ -73,7 +73,7 @@ melted <- melt(data2[,-1], id.vars=c("activity", "subject"))
 solid <- dcast(melted, subject + activity ~ variable, mean)
 
 # Write the summarized data file to a .csv file for distribution
-write.csv(solid, file="tidy2.csv", row.names=FALSE)
+write.table(solid, file="tidy2.txt",row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 
 
