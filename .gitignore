@@ -227,3 +227,5 @@ pip-log.txt
 # R data files from past sessions
 .Rdata
 
+tidyData.txt
+tidyMeans.txt

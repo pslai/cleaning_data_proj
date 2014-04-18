@@ -2,28 +2,29 @@
 library(reshape2) #needed for melt() and dcast()
 
 # Set the wd to a directory containing the script and the previously downloaded
-# data in a directory called "UCI HAR Dataset"
+# data in a directory called "UCI_HAR_Dataset"
 
-setwd("/Users/Richard.Cass/Dropbox/Learning Materials/Random R/cleaning_data_proj/")
+#setwd("REDACTED")  # The working directory has been removed for privacy - should be directory with data dir
+data_dir <- "UCI_HAR_Dataset/"
 
 # Load the various data files:
 # training data and test data:
-train           <- read.table("UCI HAR Dataset/train/X_train.txt")      
-test            <- read.table("UCI HAR Dataset/test/X_test.txt")
+train           <- read.table(paste0(data_dir,"train/X_train.txt"))      
+test            <- read.table(paste0(data_dir,"test/X_test.txt"))
 
 # Column headings for data files:
-colLabels       <- read.table("UCI HAR Dataset/features.txt", stringsAsFactors=F)
+colLabels       <- read.table(paste0(data_dir,"features.txt"), stringsAsFactors=F)
 
 # Activities for each row in the training and test datasets, as numbers
-trainAct        <- read.table("UCI HAR Dataset/train/y_train.txt")
-testAct         <- read.table("UCI HAR Dataset/test/y_test.txt")
+trainAct        <- read.table(paste0(data_dir,"train/y_train.txt"))
+testAct         <- read.table(paste0(data_dir,"test/y_test.txt"))
 
 # Activity names to match the numbers:
-activity_names  <- read.table("UCI HAR Dataset/activity_labels.txt")
+activity_names  <- read.table(paste0(data_dir,"activity_labels.txt"))
 
 #The subject numbers for each row in the training and test datasets:
-trainSubj       <- read.table("UCI HAR Dataset/train/subject_train.txt")
-testSubj        <- read.table("UCI HAR Dataset/test/subject_test.txt")
+trainSubj       <- read.table(paste0(data_dir,"train/subject_train.txt"))
+testSubj        <- read.table(paste0(data_dir,"test/subject_test.txt"))
 
 # End file loading
 
@@ -64,7 +65,7 @@ data <- rbind(train2, test2)
 data2 <- data[,grep("mean\\(\\)|std\\(\\)|activity|subject|set", colLabels)]  
 
 # Write the combined and edited dataset to a .csv file for distribution
-write.table(data2, file="tidy1.txt", row.names=FALSE, col.names=TRUE, quote=FALSE)
+write.table(data2, file="tidyData.txt", row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 # Melt cleaned data with activity and subject as id variables and set (the first column) omitted
 melted <- melt(data2[,-1], id.vars=c("activity", "subject"))
@@ -73,7 +74,7 @@ melted <- melt(data2[,-1], id.vars=c("activity", "subject"))
 solid <- dcast(melted, subject + activity ~ variable, mean)
 
 # Write the summarized data file to a .csv file for distribution
-write.table(solid, file="tidy2.txt",row.names=FALSE, col.names=TRUE, quote=FALSE)
+write.table(solid, file="tidyMeans.txt",row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 
 
