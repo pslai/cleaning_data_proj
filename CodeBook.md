@@ -1,6 +1,6 @@
-##Code Book
+#Code Book
 
-#tidyData.txt
+##tidyData.txt
 This file is generated from the R command:
 	write.table(data2, file="tidyData.txt", row.names=FALSE, col.names=TRUE, quote=FALSE)
 The firt line of the file is the name of each column. Each sucessive line corresponds to a row in the table. The columns are seperated by a single space. No quotes are used. There are no row names. The first three columns are as follows:
@@ -20,7 +20,7 @@ The firt line of the file is the name of each column. Each sucessive line corres
 	
 The remaining 66 columns correspond to the features from the X_test.txt and X_train.txt that contain either "mean()" or "std()" in their labels. These are the means and standard deviations over a specific time window of specific signals from the smart phone. These means and standard deviations were then mapped onto [-1, 1] to aid in there use for machine learning. More information can be found in the file features_info.txt in the main directory of the original dataset.
 
-#tidyMeans.txt
+##tidyMeans.txt
 This file is generated from the R command:
 	write.table(solid, file="tidyMeans.txt",row.names=FALSE, col.names=TRUE, quote=FALSE)
 The firt line of the file is the name of each column. Each sucessive line corresponds to a row in the table. The columns are seperated by a single space. No quotes are used. There are no row names. The first two columns are as follows:
